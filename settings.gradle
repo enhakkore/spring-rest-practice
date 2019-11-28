@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'recipe_4_1_i'
+rootProject.name = 'spring-rest-practice'

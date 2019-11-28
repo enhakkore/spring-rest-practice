@@ -21,22 +21,23 @@ import com.apress.springrecipes.court.domain.Members;
 @ComponentScan(basePackages = "com.apress.springrecipes.court")
 public class CourtRestConfiguration {
 
-    @Bean
-    public View membertemplate() {
-        return new MarshallingView(jaxb2Marshaller());
-    }
-
-    @Bean
-    public Marshaller jaxb2Marshaller() {
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setClassesToBeBound(Members.class, Member.class);
-        marshaller.setMarshallerProperties(Collections.singletonMap(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
-        return marshaller;
-    }
-
-    @Bean
-    public ViewResolver viewResolver() {
-        return new BeanNameViewResolver();
-    }
+    // //MarshallingView로 XML만들기
+    // @Bean
+    // public View membertemplate() {
+    //     return new MarshallingView(jaxb2Marshaller());
+    // }
+    //
+    // @Bean
+    // public Marshaller jaxb2Marshaller() {
+    //     Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+    //     marshaller.setClassesToBeBound(Members.class, Member.class);
+    //     marshaller.setMarshallerProperties(Collections.singletonMap(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE));
+    //     return marshaller;
+    // }
+    //
+    // @Bean
+    // public ViewResolver viewResolver() {
+    //     return new BeanNameViewResolver();
+    // }
 
 }
