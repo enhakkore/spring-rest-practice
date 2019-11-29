@@ -13,6 +13,9 @@ import com.apress.springrecipes.court.domain.Members;
 import com.apress.springrecipes.court.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
 
 @Controller
 public class RestMemberController {
@@ -51,16 +54,16 @@ public class RestMemberController {
     //     return memberService.find(memberID);
     // }
 
-//    //ResponseEntity로 클라이언트에게 알려주기
-//    @RequestMapping("/member/{memberid}")
-//    @ResponseBody
-//    public ResponseEntity<Member> getMember(@PathVariable("memberid") long memberID) {
-//        Member member = memberService.find(memberID);
-//        if(member != null) {
-//            return new ResponseEntity<Member>(member, HttpStatus.OK);
-//        }
-//        return new ResponseEntity(HttpStatus.NOT_FOUND);
-//    }
+    //ResponseEntity로 클라이언트에게 알려주기
+    @RequestMapping("/member/{memberid}")
+    @ResponseBody
+    public ResponseEntity<Member> getMember(@PathVariable("memberid") long memberID) {
+        Member member = memberService.find(memberID);
+        if(member != null) {
+            return new ResponseEntity<Member>(member, HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
 //
 //    //MappingJackson2JsonView
 //    @RequestMapping(value = "/members", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -85,5 +88,18 @@ public class RestMemberController {
         Members members = new Members();
         members.addMembers(memberService.findAll());
         return members;
+    }
+
+    //스프링으로 REST 서비스 액세스하기
+    @RequestMapping("/requestREST")
+    @ResponseBody
+    public Members getRest() {
+        final String uri = "http://localhost:8080/spring-rest-practice/members";
+//        HashMap<String, String > param = new HashMap<>();
+//        param.put("memberId", "2");
+        RestTemplate restTemplate = new RestTemplate();
+        Members result = restTemplate.getForObject(uri, Members.class);
+        System.out.print(result);
+        return result;
     }
 }

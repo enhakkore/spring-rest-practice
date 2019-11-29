@@ -83,7 +83,18 @@ ResponseEntity 클래스는 응답 본문과 HTTP 응답 코드를 포함하는 
     ```  
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'  
-    ```
+    ```  
+* RestTemplate 활용 예  
+    ```java
+    public Members getRest() {
+        final String url = "http://localhost:8080/spring-rest-practice/members";
+        RestTemplate restTemplate = new RestTemplate();
+        Members members = restTemplate.getForOnject(url, Members.class);
+        System.out.print(members);
+        return members;
+    }
+    ```  
+
 ---
 ### 이슈  
 * Java 11에는 이전 버전에 있었던 Java EE 모듈이 없다.  
