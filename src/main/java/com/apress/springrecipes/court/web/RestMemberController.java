@@ -1,6 +1,7 @@
 package com.apress.springrecipes.court.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,14 +35,14 @@ public class RestMemberController {
     // }
 
     //@ResponseBody로 XML만들기
-    @RequestMapping("/members")
-    @ResponseBody
-    public Members getRestMembers(Model model) {
-        Members members = new Members();
-        members.addMembers(memberService.findAll());
-        model.addAttribute("members", members);
-        return members;
-    }
+//    @RequestMapping("/members")
+//    @ResponseBody
+//    public Members getRestMembers(Model model) {
+//        Members members = new Members();
+//        members.addMembers(memberService.findAll());
+//        model.addAttribute("members", members);
+//        return members;
+//    }
 
     // //@PathVariable로 결과 거르기
     // @RequestMapping("/member/{memberid}")
@@ -50,14 +51,39 @@ public class RestMemberController {
     //     return memberService.find(memberID);
     // }
 
-    //ResponseEntity로 클라이언트에게 알려주기
-    @RequestMapping("/member/{memberid}")
+//    //ResponseEntity로 클라이언트에게 알려주기
+//    @RequestMapping("/member/{memberid}")
+//    @ResponseBody
+//    public ResponseEntity<Member> getMember(@PathVariable("memberid") long memberID) {
+//        Member member = memberService.find(memberID);
+//        if(member != null) {
+//            return new ResponseEntity<Member>(member, HttpStatus.OK);
+//        }
+//        return new ResponseEntity(HttpStatus.NOT_FOUND);
+//    }
+//
+//    //MappingJackson2JsonView
+//    @RequestMapping(value = "/members", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public String getRestMembersJson(Model model) {
+//        Members members = new Members();
+//        members.addMembers(memberService.findAll());
+//        model.addAttribute("members", members);
+//        return "jsonmembertemplate";
+//    }
+//
+//    @RequestMapping(value = "/members", produces = MediaType.APPLICATION_XML_VALUE)
+//    public String getRestMembersXml(Model model){
+//        Members members = new Members();
+//        members.addMembers(memberService.findAll());
+//        model.addAttribute("members", members);
+//        return "xmlmembertemplate";
+//    }
+//
+    @RequestMapping("/members")
     @ResponseBody
-    public ResponseEntity<Member> getMember(@PathVariable("memberid") long memberID) {
-        Member member = memberService.find(memberID);
-        if(member != null) {
-            return new ResponseEntity<Member>(member, HttpStatus.OK);
-        }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    public Members getRestMember() {
+        Members members = new Members();
+        members.addMembers(memberService.findAll());
+        return members;
     }
 }
