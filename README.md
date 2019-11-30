@@ -95,6 +95,24 @@ ResponseEntity 클래스는 응답 본문과 HTTP 응답 코드를 포함하는 
     }
     ```  
 
+* RSS/아톰 피드  
+    * 아톰 피드  
+        아톰 피드는 하나의 feed에 여러 entry를 포함하고 있다.  
+        하나의 feed에는 title, id, updated 등의 메타데이터가 있고, 각 entry에는 title, id, updated, summary 등의 데이터가 있다.  
+
+    * RSS 피드
+        RSS 피드는 하나의 channel에 여러 item을 포함하고 있다.  
+        하나의 channel에는 title, link, description, lastBuilDate 등의 메타데이터가 있고, 각 item에는 title, link, pubDate, author 등의 데이터가 있다.  
+    * 작동 흐름  
+        사용자가 브라우저에서 RSS or 아톰 피드를 요청하는 주소값을 입력하면  
+        controller는 주소값에 해당하는 메서드를 실행한다.  
+        메서드는 RSS or 아톰 피드에 넣을 데이터들을 만들고 이 데이터들의 리스트를 Model에 속성으로 추가한 Model을 View로 넘긴다.  
+        아톰 피드는 AbstractAtomFeedView를 상속한 View 클래스로, RSS 피드는 AbstractRssFeedView를 상속한 View 클래스로 View를 구현한다.  
+        각 View 클래스는 buildFeedMetadata 메서드와 buildFeedEntries(or buildFeedItems) 메서드를 오버라이드한다.  
+        각 메서드들은 Model의 속성에서 데이터들의 리스트를 가져와 entry와 item에 테이터를 채운다.  
+        사용자는 브라우저에서 RSS or 아톰 피드를 xml형식으로 볼 수 있다.
+
+    
 ---
 ### 이슈  
 * Java 11에는 이전 버전에 있었던 Java EE 모듈이 없다.  

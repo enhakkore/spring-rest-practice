@@ -2,6 +2,8 @@ package com.apress.springrecipes.court.web.config;
 
 import java.util.Collections;
 
+import com.apress.springrecipes.court.feeds.AtomFeedView;
+import com.apress.springrecipes.court.feeds.RSSFeedView;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -48,9 +50,20 @@ public class CourtRestConfiguration {
 //         return marshaller;
 //     }
 //
-//     @Bean
-//     public ViewResolver viewResolver() {
-//         return new BeanNameViewResolver();
-//     }
+    //RSS/아톰 피드 발행하기
+    @Bean
+    public AtomFeedView atomfeedtemplate() {
+        return new AtomFeedView();
+    }
+
+    @Bean
+    public RSSFeedView rssfeedtemplate() {
+        return new RSSFeedView();
+    }
+
+     @Bean
+     public ViewResolver viewResolver() {
+         return new BeanNameViewResolver();
+     }
 
 }
